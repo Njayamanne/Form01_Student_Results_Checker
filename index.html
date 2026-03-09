@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>CYS academy · Sequences & Functions</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon-32x32.png">
+    <!-- Google Fonts & Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ultra professional, clean, minimalist */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f0f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            position: relative;
+        }
+
+        .professional-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 30%, rgba(200, 220, 240, 0.3) 0%, transparent 30%),
+                        radial-gradient(circle at 90% 70%, rgba(170, 200, 230, 0.25) 0%, transparent 35%),
+                        linear-gradient(135deg, #e9eff5 0%, #dbe3ec 100%);
+            z-index: -1;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 36px;
+            box-shadow: 0 20px 40px -10px rgba(0, 30, 50, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+            padding: 2rem 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: all 0.2s ease;
+        }
+
+        .academy-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.7rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .logo-area h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #1c3b4f;
+        }
+
+        .logo-area span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #3a6378;
+            background: rgba(44, 92, 115, 0.08);
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1f4b5e;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* index panel */
+        .index-panel {
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 2.2rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.8);
+            box-shadow: 0 10px 25px -8px rgba(0, 40, 60, 0.1);
+            text-align: center;
+        }
+
+        .index-panel h2 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: #1c3f50;
+            margin-bottom: 0.3rem;
+        }
+
+        .index-panel .subt {
+            color: #2b5b72;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            font-size: 0.95rem;
+        }
+
+        .index-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .index-form input {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 30, 40, 0.05), 0 1px 0 0 #cbdae3 inset;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #173d4d;
+            outline: none;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .index-form input:focus {
+            box-shadow: 0 0 0 3px rgba(28, 92, 120, 0.2), 0 1px 0 0 #cbdae3 inset;
+        }
+
+        .index-form button {
+            background: #1b4f65;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: white;
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 8px 18px -6px #103e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
+            width: 100%;
+        }
+
+        /* result card */
+        .result-card {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(14px);
+            border-radius: 32px;
+            padding: 2rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+            flex-wrap: wrap;
+        }
+
+        .result-header i {
+            font-size: 2.2rem;
+            color: #1b5c77;
+            background: white;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 40, 60, 0.1);
+        }
+
+        .greeting {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #113c4d;
+            line-height: 1.2;
+        }
+
+        .greeting small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #2f647b;
+            display: block;
+        }
+
+        /* exam name banner */
+        .exam-badge {
+            background: rgba(27, 79, 101, 0.1);
+            border-radius: 60px;
+            padding: 0.6rem 1.5rem;
+            margin-bottom: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            color: #1b4f65;
+            border: 1px solid rgba(255,255,255,0.6);
+            font-size: 1rem;
+        }
+
+        .marks-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            background: rgba(235, 245, 250, 0.5);
+            border-radius: 26px;
+            padding: 1.3rem 1.2rem;
+            margin: 1.8rem 0;
+        }
+
+        .mark-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+            border-bottom: 1px dashed rgba(0, 70, 90, 0.1);
+            padding: 0.6rem 0;
+        }
+
+        .mark-item:last-child {
+            border-bottom: none;
+        }
+
+        .mark-item .label {
+            font-weight: 500;
+            color: #1c4a5d;
+        }
+
+        .mark-item .value {
+            font-weight: 600;
+            background: white;
+            padding: 0.2rem 1.2rem;
+            border-radius: 50px;
+            color: #1d627c;
+            font-size: 1.1rem;
+        }
+
+        /* progress bar for discipline */
+        .discipline-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 1rem 0 0.5rem;
+        }
+        .discipline-bar .label {
+            font-weight: 500;
+            color: #1c4a5d;
+            min-width: 90px;
+        }
+        .progress-container {
+            flex: 1;
+            height: 12px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #2d7e9b, #1b5c77);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .discipline-percent {
+            font-weight: 600;
+            color: #1d627c;
+            min-width: 45px;
+            text-align: right;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1.8rem;
+        }
+
+        .btn {
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 500;
+            font-size: 1rem;
+            background: white;
+            color: #154f64;
+            cursor: pointer;
+            transition: 0.15s;
+            box-shadow: 0 4px 12px rgba(0, 40, 60, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid rgba(255,255,255,0.7);
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: #1b4f65;
+            color: white;
+            box-shadow: 0 8px 16px -6px #0b3849;
+        }
+
+        .btn-primary:hover {
+            background: #134454;
+        }
+
+        /* papers page – only question paper link */
+        .papers-panel {
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(14px);
+            border-radius: 32px;
+            padding: 2rem 1.5rem;
+        }
+
+        .papers-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .papers-header h2 {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #113c4d;
+        }
+
+        .drive-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.8rem 0;
+        }
+
+        .drive-item {
+            background: white;
+            padding: 1rem 1.2rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 3px 10px rgba(0, 30, 50, 0.04);
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .drive-item i {
+            font-size: 1.6rem;
+            color: #1a5e7a;
+            min-width: 32px;
+        }
+
+        .drive-item a {
+            font-weight: 500;
+            color: #0f4459;
+            text-decoration: none;
+            font-size: 0.95rem;
+            word-break: break-word;
+            flex: 1;
+            border-bottom: 1px solid transparent;
+            transition: 0.1s;
+        }
+
+        .drive-item a:hover {
+            border-bottom-color: #1a5e7a;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            color: #3d6b7f;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+        @media (max-width: 400px) {
+            .main-container { padding: 1.5rem 1.2rem; }
+            .greeting { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="professional-bg"></div>
+
+    <div class="main-container">
+        <div class="academy-header">
+            <div class="logo-area">
+                <h1>CYS academy</h1>
+                <span>confidential results</span>
+            </div>
+            <div class="stats-card"><i class="fas fa-lock"></i>Secure</div>
+        </div>
+
+        <!-- PAGE 1: index entry – secure 6-char, no hints -->
+        <div id="indexPage" class="index-panel">
+            <h2>Index Number</h2>
+            <div class="subt">enter your 6-character index number</div>
+            <div class="index-form">
+                <input type="text" id="indexInput" autocomplete="off" maxlength="6">
+                <button id="checkResultBtn"><i class="fas fa-arrow-right"></i> verify</button>
+            </div>
+            <div class="footer-note" style="margin-top:2rem;">
+                <i class="fas fa-shield-alt"></i> 6‑digit confidential code
+            </div>
+        </div>
+
+        <!-- PAGE 2: result view with exam name & discipline bar -->
+        <div id="resultPage" class="result-card hidden">
+            <div class="result-header">
+                <i class="fas fa-user-graduate"></i>
+                <div class="greeting" id="studentGreeting">Hello, <span id="studentNameDisplay"></span> <small>your result</small></div>
+            </div>
+
+            <!-- exam name badge -->
+            <div class="exam-badge">
+                <i class="fas fa-pencil-alt"></i> Exam: <strong>Sequences and Functions</strong>
+            </div>
+
+            <div class="marks-grid" id="marksDisplay">
+                <!-- dynamic percentage and grade -->
+            </div>
+
+            <!-- discipline progress bar (dynamic) -->
+            <div class="discipline-bar" id="disciplineBarContainer">
+                <span class="label"><i class="fas fa-clock"></i> Discipline</span>
+                <div class="progress-container">
+                    <div class="progress-fill" id="disciplineProgress" style="width: 100%;"></div>
+                </div>
+                <span class="discipline-percent" id="disciplinePercent">100%</span>
+            </div>
+
+            <div class="action-buttons">
+                <!-- only one paper button (question paper) -->
+                <button class="btn btn-primary" id="viewPapersBtn"><i class="fas fa-file-pdf"></i> view question paper</button>
+                <button class="btn" id="backToIndexBtn"><i class="fas fa-chevron-left"></i> new check</button>
+            </div>
+        </div>
+
+        <!-- PAGE 3: only question paper link (no other documents) -->
+        <div id="papersPage" class="papers-panel hidden">
+            <div class="papers-header">
+                <i class="fas fa-folder-open" style="font-size: 2rem; color:#156277;"></i>
+                <h2 id="paperStudentName">question paper</h2>
+            </div>
+            <div class="drive-links" id="driveLinksContainer">
+                <!-- only one link will be injected -->
+            </div>
+            <button class="btn" id="backToResultFromPapers"><i class="fas fa-arrow-left"></i> back to result</button>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // STUDENT DATA with 6-char unpredictable index + discipline values
+            const students = [
+                { name: 'Muthuli',   index: 'X7K9M2', mark: 96, discipline: 100 },
+                { name: 'Roneli',    index: 'R4T8Q1', mark: 90, discipline: 100 },
+                { name: 'Dhanushk',  index: 'B3N6C9', mark: 90, discipline: 100 },
+                { name: 'Sohansa',   index: 'L2P5S7', mark: 86, discipline: 100 },
+                { name: 'Thane',     index: 'J8V3F5', mark: 86, discipline: 98 },   // Thane 98%
+                { name: 'Romario',   index: 'W9D2X4', mark: 75, discipline: 100 },
+                { name: 'Maliga',    index: 'H5G7R2', mark: 79, discipline: 100 },
+                { name: 'Alexander', index: 'T1M8N6', mark: 70, discipline: 96 }    // Alexander 96%
+            ];
+
+            // ONLY question paper link (no answer script or assignment)
+            function getQuestionPaperLink(studentName) {
+                // single drive link for question paper
+                return `https://drive.google.com/file/d/1gsslAkarv2psPyu0eSczNpUPwXeiqfJ9/view?usp=sharing`;
+            }
+
+            // DOM elements
+            const indexPage = document.getElementById('indexPage');
+            const resultPage = document.getElementById('resultPage');
+            const papersPage = document.getElementById('papersPage');
+            const indexInput = document.getElementById('indexInput');
+            const checkBtn = document.getElementById('checkResultBtn');
+            const studentNameDisplay = document.getElementById('studentNameDisplay');
+            const marksDisplay = document.getElementById('marksDisplay');
+            const disciplineProgress = document.getElementById('disciplineProgress');
+            const disciplinePercent = document.getElementById('disciplinePercent');
+            const viewPapersBtn = document.getElementById('viewPapersBtn');
+            const backToIndexBtn = document.getElementById('backToIndexBtn');
+            const backToResultFromPapers = document.getElementById('backToResultFromPapers');
+            const paperStudentName = document.getElementById('paperStudentName');
+            const driveLinksContainer = document.getElementById('driveLinksContainer');
+
+            let currentStudent = null;
+
+            function findStudentByIndex(idx) {
+                return students.find(s => s.index.toLowerCase() === idx.trim().toLowerCase());
+            }
+
+            function showResult(student) {
+                currentStudent = student;
+                studentNameDisplay.innerText = student.name;
+
+                // Fill marks grid (percentage & grade only, but we keep rank as additional info)
+                marksDisplay.innerHTML = `
+                    <div class="mark-item"><span class="label"><i class="fas fa-star"></i> percentage</span> <span class="value">${student.mark}%</span></div>
+                    <div class="mark-item"><span class="label"><i class="fas fa-trophy"></i> grade</span> <span class="value">${student.mark >= 90 ? 'A+' : student.mark >= 80 ? 'A' : student.mark >= 70 ? 'B' : 'C'}</span></div>
+                    <div class="mark-item"><span class="label"><i class="fas fa-chart-line"></i> rank</span> <span class="value">#${students.filter(s=>s.mark>student.mark).length+1}</span></div>
+                `;
+
+                // Set discipline progress bar
+                const discValue = student.discipline;
+                disciplineProgress.style.width = discValue + '%';
+                disciplinePercent.innerText = discValue + '%';
+
+                // Show/hide discipline bar (always visible, but values vary)
+                indexPage.classList.add('hidden');
+                resultPage.classList.remove('hidden');
+                papersPage.classList.add('hidden');
+            }
+
+            function showPapers() {
+                if (!currentStudent) return;
+                paperStudentName.innerText = `${currentStudent.name} – question paper`;
+
+                // Only ONE link: the question paper
+                const questionPaperUrl = getQuestionPaperLink(currentStudent.name);
+                driveLinksContainer.innerHTML = `
+                    <div class="drive-item">
+                        <i class="fas fa-file-pdf" style="color:#d44b4b;"></i>
+                        <a href="${questionPaperUrl}" target="_blank">📄 Sequences and Functions – question paper</a>
+                        <i class="fas fa-external-link-alt" style="color:#1a5e7a;"></i>
+                    </div>
+                `;
+
+                indexPage.classList.add('hidden');
+                resultPage.classList.add('hidden');
+                papersPage.classList.remove('hidden');
+            }
+
+            function goBackToIndex() {
+                indexPage.classList.remove('hidden');
+                resultPage.classList.add('hidden');
+                papersPage.classList.add('hidden');
+                indexInput.value = '';
+                currentStudent = null;
+            }
+
+            // Event: check result
+            checkBtn.addEventListener('click', () => {
+                const entered = indexInput.value.trim();
+                if (!entered || entered.length !== 6) {
+                    alert('Please enter your 6-character index number');
+                    return;
+                }
+                const student = findStudentByIndex(entered);
+                if (!student) {
+                    alert('Invalid index number. Access denied.');
+                    return;
+                }
+                showResult(student);
+            });
+
+            indexInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkBtn.click();
+                }
+            });
+
+            viewPapersBtn.addEventListener('click', () => { if (currentStudent) showPapers(); });
+            backToResultFromPapers.addEventListener('click', () => {
+                if (currentStudent) {
+                    papersPage.classList.add('hidden');
+                    resultPage.classList.remove('hidden');
+                } else { goBackToIndex(); }
+            });
+            backToIndexBtn.addEventListener('click', goBackToIndex);
+
+            // initial state
+            goBackToIndex();
+        })();
+    </script>
+</body>
+</html>
